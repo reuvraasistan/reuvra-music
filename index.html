@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f5">
+  <meta name="description" content="Reuvra Music ile fikirlerini müziğe dönüştür.">
+  <title>Reuvra Music — AI Music Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="Reuvra Music ana sayfa">
+        <span class="brand-mark">R</span>
+        <span>reuvra<span class="brand-light"> music</span></span>
+      </a>
+
+      <button class="new-project" id="newProjectBtn"><span>＋</span> Yeni şarkı</button>
+
+      <div class="nav-label">ÇALIŞMA ALANI</div>
+      <nav class="nav">
+        <a class="nav-link active" href="#create"><span>✳</span> Oluştur</a>
+        <a class="nav-link" href="#cover"><span>♫</span> AI Cover Studio</a>
+        <a class="nav-link" href="#library"><span>▤</span> Kütüphanem</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="plan-card">
+          <div class="plan-icon">♫</div>
+          <div>
+            <strong>Reuvra Studio</strong>
+            <p>Yaratıcılığın burada başlar.</p>
+          </div>
+        </div>
+        <div class="user-row">
+          <div class="avatar">R</div>
+          <div><strong>Misafir kullanıcı</strong><small>Yerel demo</small></div>
+          <span class="more">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuBtn" aria-label="Menüyü aç">☰</button>
+        <div class="breadcrumb">Stüdyo <span>/</span> <strong>Yeni şarkı</strong></div>
+        <div class="top-actions"><span class="status-dot"></span><span id="serviceStatus">Sunucu kontrol ediliyor</span></div>
+      </header>
+
+      <section class="workspace" id="create">
+        <div class="intro">
+          <div class="eyebrow">REUVRA MUSIC STUDIO</div>
+          <h1>Aklındaki sesi <span>oluştur.</span></h1>
+          <p>Bir fikir yaz. Onu sana özel bir müzik deneyimine dönüştürelim.</p>
+        </div>
+
+        <form class="creator-card" id="musicForm">
+          <div class="card-heading">
+            <div><span class="step">01</span><strong>Şarkını tarif et</strong></div>
+            <span class="subtle">Ne duymak istiyorsun?</span>
+          </div>
+
+          <label class="field-label" for="prompt">Müzik açıklaması</label>
+          <textarea id="prompt" name="prompt" maxlength="1200" placeholder="Örnek: Gece yolculuğu hissi veren, duygusal piyano melodili, modern Türkçe pop şarkısı..." required></textarea>
+          <div class="textarea-footer"><span>Tarzı, duyguyu, enstrümanları ve atmosferi anlat.</span><span id="charCount">0 / 1200</span></div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="genre">Müzik türü</label>
+              <select id="genre" name="genre">
+                <option value="Serbest">Serbest</option>
+                <option>Pop</option><option>Türkçe pop</option><option>Arabesk</option>
+                <option>Rap / Hip-hop</option><option>Rock</option><option>Elektronik</option>
+                <option>Akustik</option><option>Jazz</option><option>Lo-fi</option><option>Film müziği</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label" for="vocal">Vokal</label>
+              <select id="vocal" name="vocal">
+                <option value="Otomatik">Otomatik</option>
+                <option value="Kadın vokal">Kadın vokal</option>
+                <option value="Erkek vokal">Erkek vokal</option>
+                <option value="Enstrümantal">Enstrümantal</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label" for="mood">Atmosfer</label>
+              <select id="mood" name="mood">
+                <option value="Otomatik">Otomatik</option>
+                <option>Duygusal</option><option>Enerjik</option><option>Huzurlu</option>
+                <option>Karanlık</option><option>Umutlu</option><option>Epik</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="lyrics-heading">
+            <div><span class="step">02</span><strong>Şarkı sözleri</strong></div>
+            <span class="subtle">İsteğe bağlı</span>
+          </div>
+          <div class="lyrics-options">
+            <label class="radio-option"><input type="radio" name="lyricsMode" value="ai" checked> <span><strong>AI söz yazsın</strong><small>Fikrine uygun sözler oluşturulsun.</small></span></label>
+            <label class="radio-option"><input type="radio" name="lyricsMode" value="custom"> <span><strong>Kendi sözlerimi kullan</strong><small>Şarkı sözlerini kendin ekle.</small></span></label>
+          </div>
+          <textarea id="lyrics" class="lyrics-input hidden" maxlength="5000" placeholder="Şarkı sözlerini buraya yaz..."></textarea>
+
+          <div class="form-bottom">
+            <p><span class="sparkle">✦</span> İlk sürüm: üretim servisi bağlantısı bekleniyor.</p>
+            <button type="submit" class="generate-btn" id="generateBtn"><span>✦</span> Şarkı oluştur <span class="arrow">→</span></button>
+          </div>
+          <div class="notice hidden" id="notice" role="status"></div>
+        </form>
+
+
+        <section class="cover-section" id="cover">
+          <div class="section-title">
+            <div><div class="eyebrow">YENİDEN YORUMLA</div><h2>AI Cover Studio</h2></div>
+            <span class="library-count">Melodi ve sözler korunur</span>
+          </div>
+          <div class="creator-card cover-card">
+            <div class="card-heading">
+              <div><span class="step">01</span><strong>Kaynak şarkını ekle</strong></div>
+              <span class="subtle">Yalnızca kullanma iznin olan içerikler</span>
+            </div>
+            <div class="cover-source-grid">
+              <label class="upload-box" for="coverFile">
+                <span class="upload-icon">↑</span>
+                <strong>Ses dosyası yükle</strong>
+                <small>MP3, WAV veya desteklenen ses formatı</small>
+                <input id="coverFile" type="file" accept="audio/*">
+                <span class="file-name" id="coverFileName">Dosya seçilmedi</span>
+              </label>
+              <div class="url-box">
+                <label class="field-label" for="coverUrl">Desteklenen kaynak bağlantısı</label>
+                <input id="coverUrl" type="url" placeholder="https://...">
+                <small>Bağlantı desteği, sağlayıcının izin verdiği kaynaklarla sınırlıdır.</small>
+              </div>
+            </div>
+
+            <div class="cover-options">
+              <div class="field">
+                <label class="field-label" for="coverGenre">Yeni müzik tarzı</label>
+                <select id="coverGenre">
+                  <option>Akustik</option><option>Arabesk</option><option>Pop</option>
+                  <option>Rock</option><option>Jazz</option><option>Orkestra</option>
+                  <option>Piyano</option><option>Elektronik</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="coverVocal">Vokal</label>
+                <select id="coverVocal">
+                  <option>Orijinal vokal karakteri</option>
+                  <option>İzinli kadın AI vokal</option>
+                  <option>İzinli erkek AI vokal</option>
+                  <option>Enstrümantal</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="coverMood">Atmosfer</label>
+                <select id="coverMood">
+                  <option>Duygusal</option><option>Huzurlu</option><option>Enerjik</option>
+                  <option>Epik</option><option>Sakin</option>
+                </select>
+              </div>
+            </div>
+            <label class="preserve-option">
+              <input type="checkbox" id="preserveOriginal" checked disabled>
+              <span><strong>Orijinal sözleri ve melodiyi koru</strong><small>Cover boyunca ana melodi ve sözler korunacak şekilde tasarlanır.</small></span>
+              <span class="locked">SABİT</span>
+            </label>
+            <label class="permission-option">
+              <input type="checkbox" id="rightsConfirm">
+              <span>Bu ses kaydını kullanma ve üzerinde işlem yapma hakkım veya gerekli iznim var.</span>
+            </label>
+            <div class="form-bottom">
+              <p><span class="sparkle">✦</span> Cover üretimi için uyumlu AI servisi bağlantısı gerekiyor.</p>
+              <button type="button" class="generate-btn" id="coverBtn"><span>♫</span> Cover oluştur <span class="arrow">→</span></button>
+            </div>
+            <div class="notice hidden" id="coverNotice" role="status"></div>
+          </div>
+        </section>
+
+        <section class="library-section" id="library">
+          <div class="section-title"><div><div class="eyebrow">MÜZİK ARŞİVİN</div><h2>Son çalışmaların</h2></div><span class="library-count" id="libraryCount">0 şarkı</span></div>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">♫</div>
+            <strong>Henüz burada bir şarkı yok</strong>
+            <p>İlk müziğini oluşturduğunda çalışmaların burada görünecek.</p>
+            <button type="button" class="text-button" id="emptyCreateBtn">İlk şarkını tasarla <span>→</span></button>
+          </div>
+          <div class="track-list" id="trackList"></div>
+        </section>
+        <footer>© 2026 Reuvra Music <span>Fikirden müziğe.</span></footer>
+      </section>
+    </main>
+  </div>
+  <audio id="audioPlayer"></audio>
+  <script src="/app.js"></script>
+</body>
+</html>
